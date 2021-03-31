@@ -1,33 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Memory
 {
     public partial class Form1 : Form
     {
+        private int moves = 0;
+        private int[] tile = new int[16];
+        private Boolean[] tileDisplay = new Boolean[16];
+        private Boolean firstShot = true;
 
-        int moves = 0;
-        int[] tile = new int[16];
-        Boolean[] tileDisplay = new Boolean[16];
-        Boolean firstShot = true;
- 
-        int firstIndex;
-        int secondIndex;
+        private int firstIndex;
+        private int secondIndex;
 
         public Form1()
         {
             InitializeComponent();
 
             StartGame();
-
         }
 
         private void StartGame()
@@ -35,16 +25,15 @@ namespace Memory
             moves = 0;
             firstIndex = -1;
             secondIndex = -1;
-            
+
             ResetTiles();
             GenerateColors();
             HideText();
         }
 
-
         private void ResetTiles()
         {
-            for (int i=0; i<16; i++)
+            for (int i = 0; i < 16; i++)
             {
                 tile[i] = 0;
             }
@@ -58,12 +47,12 @@ namespace Memory
                 int[] pair = GetEmptyTilesPair();
                 tile[pair[0]] = i;
                 tile[pair[1]] = i;
-            } 
-         }
+            }
+        }
 
         private void HideText()
         {
-            for (int i=0; i<16; i++)
+            for (int i = 0; i < 16; i++)
             {
                 tileDisplay[i] = false;
             }
@@ -81,7 +70,7 @@ namespace Memory
                 first = rand.Next(0, 16);
                 j++;
                 if (tile[first] == 0) break;
-            } while (true );
+            } while (true);
 
             j = 0;
             do
@@ -89,15 +78,14 @@ namespace Memory
                 second = rand.Next(0, 15);
                 j++;
                 if (tile[second] == 0 && second != first) break;
-            } while ( true );
+            } while (true);
 
             return new int[] { first, second };
         }
 
         private void Check()
         {
-
-            if ( tile[firstIndex] == tile[secondIndex] )
+            if (tile[firstIndex] == tile[secondIndex])
             {
                 tileDisplay[firstIndex] = true;
                 tileDisplay[secondIndex] = true;
@@ -117,14 +105,13 @@ namespace Memory
             moves++;
 
             Render();
-
         }
 
         private void CheckIfEnd()
         {
             Boolean flag = true;
 
-            for (int i=0; i<16; i++)
+            for (int i = 0; i < 16; i++)
             {
                 if (tileDisplay[i] == false) flag = false;
             }
@@ -134,7 +121,6 @@ namespace Memory
 
         private void Render()
         {
-            
             if (tileDisplay[0]) button1.Text = Convert.ToString(tile[0]);
             else button1.Text = "";
 
@@ -324,7 +310,7 @@ namespace Memory
 
         private void button17_Click(object sender, EventArgs e)
         {
-            for (int i=0; i<16; i++)
+            for (int i = 0; i < 16; i++)
             {
                 tileDisplay[i] = true;
             }
@@ -334,7 +320,6 @@ namespace Memory
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void button9_Click(object sender, EventArgs e)
