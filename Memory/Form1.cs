@@ -318,10 +318,6 @@ namespace Memory
             Render();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
             button9.Text = Convert.ToString(tile[8]);
